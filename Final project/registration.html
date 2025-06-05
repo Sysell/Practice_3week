@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | Моя семья – мой космос</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #252525;
+            width: 100%; 
+            padding: 15px 0; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px; 
+            margin-left: 90px; 
+            padding: 0 10px; 
+            width: 100%; 
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 70px;
+            height: 70px;
+            margin-right: 50px;
+            background-color: #8764da;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            background-color: #8764da;
+            color: white;
+        }
+
+        .theme-switcher {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: white;
+            margin-left: 20px;
+        }
+
+        .registration-section {
+            padding: 50px 0;
+        }
+
+        .registration-form {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #252525;
+            border-radius: 8px;
+            box-shadow: black;
+        }
+
+        .registration-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #8764da;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            background-color: #1a1a1a;
+            color: white;
+            font-size: 16px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1a1a1a;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .gender-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .gender-option {
+            display: flex;
+            align-items: center;
+        }
+
+        .gender-option input {
+            margin-right: 8px;
+        }
+
+        .file-upload {
+            border: 2px dashed #444;
+            border-radius: 4px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .file-upload:hover {
+            border-color: #1a1a1a;
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .file-upload-label {
+            display: block;
+            font-size: 16px;
+            color: white;
+        }
+
+        .file-upload-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background-color: #8764da;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #4a2352;
+        }
+
+        .family-members {
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+        }
+
+        .member-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .member-title {
+            font-size: 18px;
+            color: white;
+        }
+
+        .remove-member {
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .add-member {
+            display: inline-block;
+            margin-top: 15px;
+            color: white;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #4a2352;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            color: #4a2352;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        input:invalid {
+            border-color: #8764da;
+        }
+
+        input:valid {
+            border-color: #4CAF50;
+        }
+
+        footer {
+            background-color: #121212;
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+            margin-left: 180px;
+            max-width: 1200px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo-img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #8764da;
+            font-weight: bold;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #dddddd;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: #dddddd;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        .footer-links ul li a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .footer-contact {
+            margin-bottom: 10px;
+        }
+
+        .footer-contact a {
+            color: #dddddd;
+            text-decoration: none;
+        }
+
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 5px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gender-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-img"><img src="https://www.eduportal44.ru/Kostroma_EDU/ds_62/SiteAssets/DocLib26/%D0%94%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D1%8F%D1%8F/logotip-semya.jpg" width="70px" style="border-radius: 50px;"></div>
+                <div class="logo-text">Моя семья – мой космос</div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="account.html">Личный кабинет</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#contests">Конкурсы</a></li>
+                    <li><a href="#search">Поиск</a></li>
+                    <li><a href="#footer">Контакты</a></li>
+                </ul>
+            </nav>
+            <button class="theme-switcher">🌓</button>
+        </div>
+    </header>
+
+    <section class="registration-section">
+        <div class="container">
+            <form class="registration-form" id="registrationForm">
+                <h2>Регистрация</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email*</label>
+                        <input type="email" id="email" name="email" required placeholder="example@mail.com">
+                        <div class="error-message">Пожалуйста, введите корректный email</div>
+                        <div class="success-message">Email корректен</div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Имя*</label>
+                        <input type="text" id="firstName" name="firstName" required placeholder="Алёна">
+                        <div class="error-message">Пожалуйста, введите ваше имя</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Фамилия*</label>
+                        <input type="text" id="lastName" name="lastName" required placeholder="Сибер">
+                        <div class="error-message">Пожалуйста, введите вашу фамилию</div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="age">Возраст*</label>
+                        <input type="number" id="age" name="age" min="1" max="120" required placeholder="19">
+                        <div class="error-message">Пожалуйста, укажите ваш возраст</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Пол*</label>
+                        <div class="gender-group">
+                            <div class="gender-option">
+                                <input type="radio" id="male" name="gender" value="male" required>
+                                <label for="male">Мужской</label>
+                            </div>
+                            <div class="gender-option">
+                                <input type="radio" id="female" name="gender" value="female">
+                                <label for="female">Женский</label>
+                            </div>
+                        </div>
+                        <div class="error-message">Пожалуйста, укажите ваш пол</div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Пароль*</label>
+                        <input type="password" id="password" name="password" required minlength="6" placeholder="Не менее 6 символов">
+                        <div class="error-message">Пароль должен содержать не менее 6 символов</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Повтор пароля*</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Повторите пароль">
+                        <div class="error-message">Пароли не совпадают</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Семейная фотография*</label>
+                    <div class="file-upload">
+                        <input type="file" id="familyPhoto" name="familyPhoto" accept="image/*" required>
+                        <label for="familyPhoto" class="file-upload-label">
+                            <div class="file-upload-icon">📷</div>
+                            <div>Нажмите для загрузки фотографии</div>
+                            <div><small>Максимальный размер: 5MB</small></div>
+                        </label>
+                    </div>
+                    <div class="error-message">Пожалуйста, загрузите фотографию</div>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="privacyPolicy" name="privacyPolicy" required>
+                    <label for="privacyPolicy">Я согласен на обработку персональных данных*</label>
+                </div>
+                <div class="error-message">Необходимо ваше согласие</div>
+                
+                <div class="family-members">
+                    <div class="member-header">
+                        <h3 class="member-title">Члены семьи</h3>
+                        <span class="add-member">+ Добавить члена семьи</span>
+                    </div>
+                    
+                    <div class="member-fields">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="member1FirstName">Имя</label>
+                                <input type="text" id="member1FirstName" name="memberFirstName[]" placeholder="Имя">
+                            </div>
+                            <div class="form-group">
+                                <label for="member1LastName">Фамилия</label>
+                                <input type="text" id="member1LastName" name="memberLastName[]" placeholder="Фамилия">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="member1Age">Возраст</label>
+                                <input type="number" id="member1Age" name="memberAge[]" min="1" max="120" placeholder="Возраст">
+                            </div>
+                            <div class="form-group">
+                                <label for="member1Gender">Пол</label>
+                                <select id="member1Gender" name="memberGender[]">
+                                    <option value="">Выберите пол</option>
+                                    <option value="male">Мужской</option>
+                                    <option value="female">Женский</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <span class="remove-member">✕ Удалить</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn">Зарегистрироваться</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-links">
+                    <div class="footer-logo">
+                        <div class="footer-logo-img"><img src="https://www.eduportal44.ru/Kostroma_EDU/ds_62/SiteAssets/DocLib26/%D0%94%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D1%8F%D1%8F/logotip-semya.jpg" width="20px"></div>
+                        <div>Моя семья – мой космос</div>
+                    </div>
+                    <p>Платформа для семейного творчества и совместного времяпрепровождения.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Контакты</h3>
+                    <div class="footer-contact">
+                        <a href="tel:+74842234567">+7 (999) 26-06-06</a>
+                    </div>
+                    <div class="footer-contact">
+                        <a href="mailto:family@cosmos.ru">family@cosmos.ru</a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="index-light.html">Главная-светлая</a></li>
+                        <li><a href="registration.html">Регистрация</a></li>
+                        <li><a href="contest.html">Конкурс</a></li>
+                        <li><a href="account.html">Личный кабинет</a></li>
+                        <li><a href="404.html">Страница не найдена</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

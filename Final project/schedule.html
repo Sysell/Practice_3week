@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание конкурсов | Моя семья – мой космос</title>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --primary-color: #6c8fc7;
+            --secondary-color: #2d2d2d;
+            --accent-color: #ff8e8e;
+            --header-bg: #252525;
+            --footer-bg: #121212;
+            --footer-text: #dddddd;
+            --card-bg: #2d2d2d;
+            --card-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            --table-border: #444;
+            --table-cell-bg: #333;
+            --table-cell-hover: #3a3a3a;
+            --full-slot: #ff6b6b;
+            --available-slot: #6bff6b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #252525;
+            width: 100%; 
+            padding: 15px 0; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px; 
+            margin-left: 90px; 
+            padding: 0 10px; 
+            width: 100%; 
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 70px;
+            height: 70px;
+            margin-right: 50px;
+            background-color: #8764da;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            background-color: #8764da;
+            color: white;
+        }
+
+        .theme-switcher {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #8764da;
+            margin-left: 20px;
+        }
+
+        .schedule-section {
+            padding: 50px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            display: block;
+        }
+
+        .schedule-table th, 
+        .schedule-table td {
+            border: 1px solid #444;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .schedule-table th {
+            background-color: #8764da;
+            color: white;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+
+        .time-slot {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .contest-name {
+            text-align: left;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .slot-cell {
+            width: 90px;
+            height: 60px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .slot-cell.available {
+            background-color: #6bff6b;
+            color: #1a1a1a;
+        }
+
+        .slot-cell.full {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        .slot-cell.available:hover {
+            background-color: #5ae65a;
+        }
+
+        .slot-cell.full:hover {
+            background-color: #ff5252;
+        }
+
+        footer {
+            background-color: #121212;
+            color: #dddddd;
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+            margin-left: 180px;
+            max-width: 1200px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo-img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #8764da;
+            font-weight: bold;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #dddddd;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: #dddddd;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        .footer-links ul li a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .footer-contact {
+            margin-bottom: 10px;
+        }
+
+        .footer-contact a {
+            color: #dddddd;
+            text-decoration: none;
+        }
+
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 992px) {
+            .schedule-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 5px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .slot-cell {
+                width: 50px;
+                height: 50px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 20px;
+            }
+
+            .slot-cell {
+                width: 40px;
+                height: 40px;
+                font-size: 12px;
+            }
+
+            .contest-name {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-img"><img src="https://www.eduportal44.ru/Kostroma_EDU/ds_62/SiteAssets/DocLib26/%D0%94%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D1%8F%D1%8F/logotip-semya.jpg" width="70px" style="border-radius: 50px;"></div>
+                <div class="logo-text">Моя семья – мой космос</div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="registration.html">Регистрация</a></li>
+                    <li><a href="#auth">Авторизация</a></li>
+                    <li><a href="account.html">Личный кабинет</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#contests">Конкурсы</a></li>
+                    <li><a href="#search">Поиск</a></li>
+                    <li><a href="#footer">Контакты</a></li>
+                </ul>
+            </nav>
+            <button class="theme-switcher">🌓</button>
+        </div>
+    </header>
+
+    <section class="schedule-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Расписание конкурсов</h2>
+                <p>Выберите удобное время для участия в конкурсах</p>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Конкурс</th>
+                            <th>с 9 до 10 часов</th>
+                            <th>c 10 до 11 часов</th>
+                            <th>с 11 до 12 часов</th>
+                            <th>с 12 до 13 часов</th>
+                            <th>с 13 до 14 часов</th>
+                            <th>с 14 до 15 часов</th>
+                            <th>с 15 до 16 часов</th>
+                            <th>с 16 до 17 часов</th>
+                            <th>с 17 до 18 часов</th>
+                            <th>с 18 до 19 часов</th>
+                            <th>с 19 до 20 часов</th>
+                            <th>с 20 до 21 часов</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="contest-name">Семейная фотография</td>
+                            <td><div class="slot-cell available">9 мест</div></td>
+                            <td><div class="slot-cell available">4 места</div></td>
+                            <td><div class="slot-cell available">6 мест</div></td>
+                            <td><div class="slot-cell available">7 мест</div></td>
+                            <td><div class="slot-cell available">2 места</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell available">1 место</div></td>
+                            <td><div class="slot-cell available">11 мест</div></td>
+                            <td><div class="slot-cell available">6 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                        </tr>
+                        <tr>
+                            <td class="contest-name">Семейный рецепт</td>
+                            <td><div class="slot-cell available">8 мест</div></td>
+                            <td><div class="slot-cell available">8 мест</div></td>
+                            <td><div class="slot-cell available">6 мест</div></td>
+                            <td><div class="slot-cell available">13 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell available">4 места</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                        </tr>
+                        <tr>
+                            <td class="contest-name">Семейное древо</td>
+                            <td><div class="slot-cell available">11 мест</div></td>
+                            <td><div class="slot-cell available">6 мест</div></td>
+                            <td><div class="slot-cell available">8 мест</div></td>
+                            <td><div class="slot-cell available">4 места</div></td>
+                            <td><div class="slot-cell available">6 мест</div></td>
+                            <td><div class="slot-cell available">7 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell available">5 мест</div></td>
+                            <td><div class="slot-cell available">6 мест</div></td>
+                            <td><div class="slot-cell available">11 мест</div></td>
+                        </tr>
+                        <tr>
+                            <td class="contest-name">Семейный танец</td>
+                            <td><div class="slot-cell available">3 места</div></td>
+                            <td><div class="slot-cell available">2 места</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell available">1 место</div></td>
+                            <td><div class="slot-cell available">2 места</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell available">7 мест</div></td>
+                            <td><div class="slot-cell available">1 место</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                        </tr>
+                        <tr>
+                            <td class="contest-name">Семейная история</td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell available">4 места</div></td>
+                            <td><div class="slot-cell available">1 место</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell available">2 места</div></td>
+                            <td><div class="slot-cell available">4 места</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell available">3 места</div></td>
+                            <td><div class="slot-cell available">2 места</div></td>
+                        </tr>
+                        <tr>
+                            <td class="contest-name">Семейное творчество</td>
+                            <td><div class="slot-cell available">4 места</div></td>
+                            <td><div class="slot-cell available">5 мест</div></td>
+                            <td><div class="slot-cell available">4 места</div></td>
+                            <td><div class="slot-cell available">1 место</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell available">2 места</div></td>
+                            <td><div class="slot-cell available">3 места</div></td>
+                            <td><div class="slot-cell available">4 места</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                        </tr>
+                        <tr>
+                            <td class="contest-name">Семейный костюм</td>
+                            <td><div class="slot-cell available">7 мест</div></td>
+                            <td><div class="slot-cell available">1 место</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell available">2 места</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell full">0 мест</div></td>
+                            <td><div class="slot-cell available">13 мест</div></td>
+                            <td><div class="slot-cell available">8 мест</div></td>
+                            <td><div class="slot-cell available">9 мест</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-links">
+                    <div class="footer-logo">
+                        <div class="footer-logo-img"><img src="https://www.eduportal44.ru/Kostroma_EDU/ds_62/SiteAssets/DocLib26/%D0%94%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D1%8F%D1%8F/logotip-semya.jpg" width="20px"></div>
+                        <div>Моя семья – мой космос</div>
+                    </div>
+                    <p>Платформа для семейного творчества и совместного времяпрепровождения.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Контакты</h3>
+                    <div class="footer-contact">
+                        <a href="tel:+74842234567">+7 (999) 26-06-06</a>
+                    </div>
+                    <div class="footer-contact">
+                        <a href="mailto:family@cosmos.ru">family@cosmos.ru</a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="index-light.html">Главная-светлая</a></li>
+                        <li><a href="registration.html">Регистрация</a></li>
+                        <li><a href="contest.html">Конкурс</a></li>
+                        <li><a href="account.html">Личный кабинет</a></li>
+                        <li><a href="404.html">Страница не найдена</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

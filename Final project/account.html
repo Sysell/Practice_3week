@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет | Моя семья – мой космос</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #252525;
+            width: 100%; 
+            padding: 15px 0; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px; 
+            margin-left: 90px; 
+            padding: 0 10px; 
+            width: 100%; 
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 70px;
+            height: 70px;
+            margin-right: 50px;
+            background-color: #8764da;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            background-color: #8764da;
+            color: white;
+        }
+
+        .theme-switcher {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #8764da;
+            margin-left: 20px;
+        }
+
+        .account-section {
+            padding: 50px 0;
+        }
+
+        .account-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        .account-sidebar {
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            height: fit-content;
+        }
+
+        .account-sidebar h3 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .account-menu ul {
+            list-style: none;
+        }
+
+        .account-menu ul li {
+            margin-bottom: 10px;
+        }
+
+        .account-menu ul li a {
+            display: block;
+            padding: 8px 10px;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .account-menu ul li a:hover, .account-menu ul li a.active {
+            background-color: #8764da;
+            color: white;
+        }
+
+        .account-content {
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .account-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .account-title {
+            font-size: 24px;
+        }
+
+        .account-user {
+            display: flex;
+            align-items: center;
+        }
+
+        .account-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #8764da;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .account-name {
+            font-weight: bold;
+        }
+
+        .account-email {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .account-form {
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: white;
+        }
+
+        .form-group input[type="date"] {
+            padding: 11px 15px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-actions {
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background-color: #8764da;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #8764da;
+        }
+
+        .btn-logout {
+            background-color: #8764da;
+        }
+
+        .btn-logout:hover {
+            background-color: #e05a5a;
+        }
+
+        footer {
+            background-color: #121212;
+            color: #dddddd;
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+            margin-left: 180px;
+            max-width: 1200px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo-img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #8764da;
+            font-weight: bold;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #dddddd;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links ul li a {
+            color: #dddddd;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        .footer-links ul li a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .footer-contact {
+            margin-bottom: 10px;
+        }
+
+        .footer-contact a {
+            color: #dddddd;
+            text-decoration: none;
+        }
+
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 5px;
+            }
+
+            .account-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-img"><img src="https://www.eduportal44.ru/Kostroma_EDU/ds_62/SiteAssets/DocLib26/%D0%94%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D1%8F%D1%8F/logotip-semya.jpg" width="70px" style="border-radius: 50px;"></div>
+                <div class="logo-text">Моя семья – мой космос</div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#auth">Авторизация</a></li>
+                    <li><a href="account.html" class="active">Личный кабинет</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#contests">Конкурсы</a></li>
+                    <li><a href="#search">Поиск</a></li>
+                    <li><a href="#footer">Контакты</a></li>
+                    <li><a href="index.html" class="btn-logout">Выйти</a></li>
+                </ul>
+            </nav>
+            <button class="theme-switcher">🌓</button>
+        </div>
+    </header>
+
+    <section class="account-section">
+        <div class="container account-container">
+            <div class="account-sidebar">
+                <h3>Меню</h3>
+                <div class="account-menu">
+                    <ul>
+                        <li><a href="account.html" class="active">Запись на конкурс</a></li>
+                        <li><a href="#">Мои конкурсы</a></li>
+                        <li><a href="#">Настройки профиля</a></li>
+                        <li><a href="#">Уведомления</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="account-content">
+                <div class="account-header">
+                    <h1 class="account-title">Запись на конкурс</h1>
+                    <div class="account-user">
+                        <div class="account-avatar"><img src="https://i.pinimg.com/236x/78/03/52/7803523ea955a26002aa3de650f48745.jpg" width="50px" style="border-radius: 20px;"></div>
+                        <div>
+                            <div class="account-name">Даниил Шулькин</div>
+                            <div class="account-email">Deco@example.com</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="account-form">
+                    <div class="form-group">
+                        <label for="contest">Конкурс</label>
+                        <select id="contest" required>
+                            <option value="" disabled selected>Выберите конкурс</option>
+                            <option value="1">Семейная фотография</option>
+                            <option value="2">Семейный рецепт</option>
+                            <option value="3">Семейное древо</option>
+                            <option value="4">Семейный танец</option>
+                            <option value="5">Семейная история</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Дата</label>
+                            <input type="date" id="date" value="2024-07-08" min="2024-07-08" max="2024-07-08" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="time">Время</label>
+                            <select id="time" required>
+                                <option value="" disabled selected>Выберите время</option>
+                                <option value="9:00">9:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="12:00">12:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="17:00">17:00</option>
+                                <option value="18:00">18:00</option>
+                                <option value="19:00">19:00</option>
+                                <option value="20:00">20:00</option>
+                                <option value="21:00">21:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="participants">Количество участников</label>
+                        <input type="number" id="participants" min="1" max="10" required>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn">Записаться на конкурс</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-links">
+                    <div class="footer-logo">
+                        <div class="footer-logo-img"><img src="https://www.eduportal44.ru/Kostroma_EDU/ds_62/SiteAssets/DocLib26/%D0%94%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D1%8F%D1%8F/logotip-semya.jpg" width="20px"></div>
+                        <div>Моя семья – мой космос</div>
+                    </div>
+                    <p>Платформа для семейного творчества и совместного времяпрепровождения.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Контакты</h3>
+                    <div class="footer-contact">
+                        <a href="">+7 (999) 26-06-06</a>
+                    </div>
+                    <div class="footer-contact">
+                        <a href="">family@cosmos.ru</a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Навигация</h3>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="registration.html">Регистрация</a></li>
+                        <li><a href="contest.html">Конкурс</a></li>
+                        <li><a href="account.html">Личный кабинет</a></li>
+                        <li><a href="404.html">Страница не найдена</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

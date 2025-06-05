@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        .stage {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+        .character {
+            width: 300px;
+            height: 250px;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUloCOejmjFtp35OJ7OhxjCKn9dgcC3k3CJw&s');
+            animation: walk 1s steps(8) infinite, move 5s linear infinite;
+        }
+        @keyframes walk {
+            100% { background-position: -512px 0; }
+        }
+        @keyframes move {
+            100% { left: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stage">
+        <div class="character"></div>
+    </div>
+</body>
+</html>

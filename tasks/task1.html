@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1</title>
+    <style>
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .original-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .processed-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: grayscale(100%) blur(5px);
+            opacity: 0.9;
+        }
+        
+        .container {
+            text-align: center;
+            margin: 20px;
+        }
+        
+        .instructions {
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="https://www.pravilamag.ru/upload/img_cache/6b5/6b5117915527810f6a2d20a9e38d5f46_ce_590x394x0x121.jpg" alt="Original Image" class="original-image">
+            <img src="https://www.pravilamag.ru/upload/img_cache/6b5/6b5117915527810f6a2d20a9e38d5f46_ce_590x394x0x121.jpg" alt="Processed Image" class="processed-image">
+        </div>
+    </div>
+</body>
+</html>

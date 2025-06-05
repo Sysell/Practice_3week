@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+        }
+        .toggle {
+            position: relative;
+            width: 60px;
+            height: 34px;
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: navy;
+            border-radius: 17px;
+            outline: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .toggle:checked {
+            background-color: cyan; 
+        }
+        .toggle::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            top: 2px;
+            left: 2px;
+            background-color: cyan; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        .toggle:checked::before {
+            left: calc(100% - 32px);
+            background-color: navy;
+        }
+        .toggle:active::before {
+            width: 35px;
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" class="toggle">
+</body>
+</html>

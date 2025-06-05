@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            perspective: 1000px;
+        }
+        .cube {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            transform-style: preserve-3d;
+            animation: rotate 10s infinite linear;
+        }
+        .face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid #333;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            box-sizing: border-box;
+        }
+        .face div {
+            border: 1px solid rgba(0,0,0,0.3);
+        }
+        .front { 
+            transform: translateZ(100px);
+            background-color: rgba(255,0,0,0.5);
+        }
+        .back { 
+            transform: rotateY(180deg) translateZ(100px);
+            background-color: rgba(0,255,0,0.5);
+        }
+        .right { 
+            transform: rotateY(90deg) translateZ(100px);
+            background-color: rgba(0,0,255,0.5);
+        }
+        .left { 
+            transform: rotateY(-90deg) translateZ(100px);
+            background-color: rgba(255,255,0,0.5);
+        }
+        .top { 
+            transform: rotateX(90deg) translateZ(100px);
+            background-color: rgba(255,0,255,0.5);
+        }
+        .bottom { 
+            transform: rotateX(-90deg) translateZ(100px);
+            background-color: rgba(0,255,255,0.5);
+        }
+        @keyframes rotate {
+            from { transform: rotateX(0) rotateY(0) rotateZ(0); }
+            to { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cube">
+        <div class="face front">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+        </div>
+        <div class="face back">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+        </div>
+        <div class="face right">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+        </div>
+        <div class="face left">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+        </div>
+        <div class="face top">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+        </div>
+        <div class="face bottom">
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+            <div></div><div></div><div></div>
+        </div>
+    </div>
+</body>
+</html>

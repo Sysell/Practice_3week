@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header, footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        main {
+            flex: 3;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .post {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        aside {
+            flex: 1;
+            padding: 20px;
+            background-color: #f1f1f1;
+        }
+        /* Адаптивность */
+        @media (max-width: 991px) {
+            .container {
+                flex-direction: column;
+            }
+            .post {
+                width: calc(50% - 10px);
+            }
+        }
+        @media (max-width: 767px) {
+            .post {
+                width: 100%;
+            }
+        }
+        @media (min-width: 992px) {
+            .post {
+                width: calc(33.33% - 14px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Шапка блога</h1>
+    </header>
+    
+    <div class="container">
+        <main>
+            <article class="post">
+                <h2>Заголовок поста 1</h2>
+                <p>Текст поста...</p>
+            </article>
+            <article class="post">
+                <h2>Заголовок поста 2</h2>
+                <p>Текст поста...</p>
+            </article>
+            <article class="post">
+                <h2>Заголовок поста 3</h2>
+                <p>Текст поста...</p>
+            </article>
+            <article class="post">
+                <h2>Заголовок поста 4</h2>
+                <p>Текст поста...</p>
+            </article>
+            <article class="post">
+                <h2>Заголовок поста 5</h2>
+                <p>Текст поста...</p>
+            </article>
+            <article class="post">
+                <h2>Заголовок поста 6</h2>
+                <p>Текст поста...</p>
+            </article>
+        </main>
+        
+        <aside>
+            <h2>Боковая панель</h2>
+            <p>Дополнительная информация...</p>
+        </aside>
+    </div>
+    
+    <footer>
+        <p>Футер блога</p>
+    </footer>
+</body>
+</html>
